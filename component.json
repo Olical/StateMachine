@@ -1,0 +1,26 @@
+{
+    "name": "stateMachine",
+    "description": "JavaScript state machine that just works",
+    "version": "0.0.0",
+    "main": [
+        "./StateMachine.js"
+    ],
+    "dependencies": {
+        "eventEmitter": "4.0.2"
+    },
+    "author": {
+        "name": "Oliver Caldwell",
+        "web": "http://oli.me.uk/"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/Wolfy87/StateMachine#license-mit"
+        }
+    ],
+    "keywords": [
+        "state-machine",
+        "events",
+        "structure"
+    ]
+}
