@@ -7,7 +7,8 @@
     ],
     "dependencies": {
         "eventEmitter": "4.0.2",
-        "requirejs": "2.0.6"
+        "requirejs": "2.0.6",
+        "jasmine": "1.2.0"
     },
     "author": {
         "name": "Oliver Caldwell",
