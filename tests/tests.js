@@ -47,6 +47,71 @@ define(['../StateMachine'], function(StateMachine) {
         });
     });
 
+    describe('setState', function() {
+        it('sets the state to a string', function() {
+            var stm = new StateMachine();
+            expect(stm.getState()).toEqual(null);
+            stm.setState('foo');
+            expect(stm.getState()).toEqual('foo');
+        });
+
+        it('triggers the right events on the initial setting', function() {
+            var stm = new StateMachine();
+            var check = '';
+            stm.addListeners({
+                '>': function() {
+                    check += 'a';
+                },
+                'bar>foo': function() {
+                    check += 'b';
+                },
+                '>foo': function() {
+                    check += 'c';
+                },
+                'foo>': function() {
+                    check += 'd';
+                }
+            });
+            stm.setState('foo');
+            expect(check).toEqual('c');
+        });
+
+        it('triggers the right events on the second (or more) setting', function() {
+            var stm = new StateMachine();
+            var check = '';
+            stm.addListeners({
+                '>': function() {
+                    check += 'a';
+                },
+                'bar>foo': function() {
+                    check += 'b';
+                },
+                '>foo': function() {
+                    check += 'c';
+                },
+                'foo>': function() {
+                    check += 'd';
+                },
+                'foo>bar': function() {
+                    check += 'e';
+                },
+                '>bar': function() {
+                    check += 'f';
+                }
+            });
+            stm.setState('foo');
+            expect(check).toEqual('c');
+            check = '';
+            stm.setState('bar');
+            expect(check).toEqual('edf');
+        });
+
+        it('returns the current instance for chaining', function() {
+            var stm = new StateMachine();
+            expect(stm.setState('foo')).toEqual(stm);
+        });
+    });
+
     // Run Jasmine
     jasmineEnv.execute();
 });
