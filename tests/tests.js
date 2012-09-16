@@ -110,6 +110,16 @@ define(['../StateMachine'], function(StateMachine) {
             var stm = new StateMachine();
             expect(stm.setState('foo')).toEqual(stm);
         });
+
+        it('passes arguments along to listeners', function() {
+            var stm = new StateMachine();
+            var check = 0;
+            stm.addListener('>foo', function(a, b, c) {
+                check += a + b + c;
+            });
+            stm.setState('bar').setState('foo', [100, 200, 150]);
+            expect(check).toEqual(450);
+        });
     });
 
     // Run Jasmine
