@@ -4,6 +4,28 @@
 
 It's pretty obvious that this class is an implementation of a [state machine](https://en.wikipedia.org/wiki/Finite-state_machine) written in JavaScript. The main difference between this one and the many others out there is that it is built on top of my [EventEmitter](https://github.com/Wolfy87/EventEmitter) class. EventEmitter a is ridiculously fast, small and well tested event library that runs on pretty much every browser and JavaScript platform. It is also ready to load via AMD.
 
+## Getting the source
+
+There are a few ways you can get a copy of StateMachine. The most obvious would be to download `StateMachine.js` from this repository and load it into your page alongside [`EventEmitter.js`](https://github.com/Wolfy87/EventEmitter). You could do that with a script tag pretty easily.
+
+    <script type='text/javascript' src='EventEmitter.js'></script>
+    <script type='text/javascript' src='StateMachine.js'></script>
+
+Simple right? That will work perfectly and do everything you need it to. *But* you can take it a step further and use [Bower](https://github.com/twitter/bower) to download StateMachine and EventEmitter, then RequireJS (or any other AMD loader) to load them into your page. To install the package with Bower you can use the following line.
+
+    bower install stateMachine
+
+Yep, that's it. That will fetch StateMachine and EventEmitter as a dependency and place them both in the `components` directory of your project. With that all in place you can load StateMachine with AMD and it will load EventEmitter automatically!
+
+    define([
+        './components/stateMachine/StateMachine'
+    ], function(StateMachine) {
+        var stm = new StateMachine(),
+            mindBlown = true;
+    });
+
+When loading with this method you don't even pollute the global namespace. Everything is passed around with AMD, so no `window.*` values. If you skip AMD and use a script tag it will place it and EventEmitter in the global namespace though. This is `window` in browsers and `exports` in environments such as [node.js](http://nodejs.org/).
+
 ## License (MIT)
 
 Copyright (c) 2012 Oliver Caldwell
