@@ -153,6 +153,21 @@ define(['../StateMachine'], function(StateMachine) {
             stm.setState('bar').setState('foo', [100, 200, 150]);
             expect(check).toEqual(450);
         });
+
+        it('emits a change event on every change', function() {
+            var check = null;
+            var stm = new StateMachine({
+                initialState: 'foo',
+                listeners: {
+                    'change': function(from, to) {
+                        check = [from, to];
+                    }
+                }
+            });
+            expect(check).toEqual([null, 'foo']);
+            stm.setState('bar');
+            expect(check).toEqual(['foo', 'bar']);
+        });
     });
 
     // Run Jasmine
