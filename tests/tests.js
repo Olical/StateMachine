@@ -13,14 +13,47 @@ define(['../StateMachine'], function(StateMachine) {
 
     // Configure the tests
     describe('StateMachine', function() {
-        var stm = new StateMachine();
-
         it('loads and defines without error', function() {
+            var stm = new StateMachine();
             expect(typeof stm).toEqual('object');
         });
 
         it('extends EventEmitter', function() {
+            var stm = new StateMachine();
             expect(typeof stm.emitEvent).toEqual('function');
+        });
+
+        it('accepts an initial state', function() {
+            var stm = new StateMachine({
+                initialState: 'foo'
+            });
+            expect(stm.getState()).toEqual('foo');
+        });
+
+        it('accepts initial listeners', function() {
+            var check = null;
+            var stm = new StateMachine({
+                listeners: {
+                    '>foo': function() {
+                        check = 100;
+                    }
+                }
+            });
+            stm.setState('foo');
+            expect(check).toEqual(100);
+        });
+
+        it('accepts initial listeners and a state which executes the listeners', function() {
+            var check = null;
+            var stm = new StateMachine({
+                listeners: {
+                    '>foo': function() {
+                        check = 100;
+                    }
+                },
+                initialState: 'foo'
+            });
+            expect(check).toEqual(100);
         });
     });
 

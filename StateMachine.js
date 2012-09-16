@@ -28,14 +28,16 @@
          * @param {Object} An object containing an optional initial state and listeners object, for example: { initialState: 'foo', listeners: { '>foo': function() {...} } }
          */
         function StateMachine(options) {
-            // Register any passed listeners
-            if(options.listeners) {
-                this.addListeners(options.listeners);
-            }
+            if(options) {
+                // Register any passed listeners
+                if(options.listeners) {
+                    this.addListeners(options.listeners);
+                }
 
-            // Store the initial state if there is one
-            if(options.initialState) {
-                this.setState(options.initialState);
+                // Store the initial state if there is one
+                if(options.initialState) {
+                    this.setState(options.initialState);
+                }
             }
         }
 
