@@ -17,6 +17,11 @@ define(['../StateMachine'], function(StateMachine) {
             var stm = new StateMachine();
             expect(typeof stm).toEqual('object');
         });
+
+        it('extends EventEmitter', function() {
+            var stm = new StateMachine();
+            expect(typeof stm.emitEvent).toEqual('function');
+        });
     });
 
     // Run Jasmine
