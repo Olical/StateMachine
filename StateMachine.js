@@ -5,6 +5,15 @@
  */
 
 ;(function(exports) {
+    // This is a variable that either contains the native Object.create method
+    // Or a custom polyfill from Douglass Crockford
+    // It is used in prototypical inheritance
+    var createObject = Object.create || function(o) {
+        function F(){}
+        F.prototype = o;
+        return new F();
+    };
+
     /**
      * Builds the class and returns it to be exposed as you wish
      *
@@ -19,7 +28,10 @@
         function StateMachine(){}
 
         // This is a shortcut to the prototype to save time and bytes
-        var proto = StateMachine.prototype;
+        // This line also extends the EventEmitter class using createObject
+        // It copies the EventEmitter prototype into its own
+        // This is prototypical inheritance in action
+        var proto = StateMachine.prototype = createObject(EventEmitter.prototype);
 
         // Now we pass the finished class back down the chain
         // Another part of the code then exposes it in the correct way
