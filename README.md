@@ -26,6 +26,10 @@ Yep, that's it. That will fetch StateMachine and EventEmitter as a dependency an
 
 When loading with this method you don't even pollute the global namespace. Everything is passed around with AMD, so no `window.*` values. If you skip AMD and use a script tag it will place it and EventEmitter in the global namespace though. This is `window` in browsers and `exports` in environments such as [node.js](http://nodejs.org/).
 
+### A note on dependencies
+
+You will see a few other dependencies come down with the Bower package, but don't panic. EventEmitter is the only real dependency of the script, the others are used for testing among other things in the repository itself. They are not loaded at any point when using StateMachine.
+
 ## License (MIT)
 
 Copyright (c) 2012 Oliver Caldwell
