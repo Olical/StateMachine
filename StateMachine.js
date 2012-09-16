@@ -36,6 +36,7 @@
         /**
          * Simply fetches the current state name string and returns it
          * If there is no current state it will return null
+         * It will only return a string, and not null, if the state is a string with at least one character inside it
          *
          * @return {String|Object} The state name as a string or null if there is none set (null is technically an object)
          */
