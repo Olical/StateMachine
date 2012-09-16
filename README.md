@@ -97,6 +97,18 @@ You will see a few other dependencies come down with the Bower package, but don'
 
 You may wish to download the source will git and download the dependencies later. You can still use Bower for this, simply run `bower install` whilst inside the StateMachine directory. It will run along and fetch all packages the repository requires to do it's thing.
 
+## Testing
+
+Tests are performed using [Jasmine](http://pivotal.github.com/jasmine/) in the following browsers via [BrowserStack](http://www.browserstack.com/).
+
+ * Firefox
+ * Chrome
+ * Opera
+ * Safari
+ * IE6+
+
+There should not be any bugs in the releases, well, that's what I am aiming for anyway. However, if you do spot a bug please add it as an [issue](https://github.com/Wolfy87/StateMachine/issues) and I will fix it as soon as possible.
+
 ## License (MIT)
 
 Copyright (c) 2012 Oliver Caldwell
