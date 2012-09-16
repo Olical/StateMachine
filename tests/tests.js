@@ -35,6 +35,11 @@ define(['../StateMachine'], function(StateMachine) {
             stm._state = '';
             expect(stm.getState()).toEqual(null);
         });
+
+        it('returns null if the state is something silly like a number', function() {
+            stm._state = 42; // The answer to life the universe and everything
+            expect(stm.getState()).toEqual(null);
+        });
     });
 
     // Run Jasmine
