@@ -33,6 +33,16 @@
         // This is prototypical inheritance in action
         var proto = StateMachine.prototype = createObject(EventEmitter.prototype);
 
+        /**
+         * Simply fetches the current state name string and returns it
+         * If there is no current state it will return null
+         *
+         * @return {String|Object} The state name as a string or null if there is none set (null is technically an object)
+         */
+        proto.getState = function() {
+            return typeof this._state === 'string' ? this._state : null;
+        };
+
         // Now we pass the finished class back down the chain
         // Another part of the code then exposes it in the correct way
         return StateMachine;
