@@ -44,6 +44,17 @@
             return typeof state === 'string' && state ? state : null;
         };
 
+        /**
+         * Sets the state of the StateMachine instance
+         * Executes the appropriate listeners along the way
+         *
+         * @param {String} next The new state to use
+         * @return The current instance to allow chaining
+         */
+        proto.setState = function(next) {
+            return this;
+        };
+
         // Now we pass the finished class back down the chain
         // Another part of the code then exposes it in the correct way
         return StateMachine;
