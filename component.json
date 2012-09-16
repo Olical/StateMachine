@@ -6,7 +6,8 @@
         "./StateMachine.js"
     ],
     "dependencies": {
-        "eventEmitter": "4.0.2"
+        "eventEmitter": "4.0.2",
+        "requirejs": "2.0.6"
     },
     "author": {
         "name": "Oliver Caldwell",
