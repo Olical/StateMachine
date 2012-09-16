@@ -12,7 +12,17 @@
      * @return {Function} This will be the build StateMachine class to be exposed either via AMD or the global object
      */
     function construct(EventEmitter) {
+        /**
+         * Constructor for the StateMachine class, this is what you instantiate
+         * It does not do anything, it is just here for its prototype object
+         */
         function StateMachine(){}
+
+        // This is a shortcut to the prototype to save time and bytes
+        var proto = StateMachine.prototype;
+
+        // Now we pass the finished class back down the chain
+        // Another part of the code then exposes it in the correct way
         return StateMachine;
     }
 
