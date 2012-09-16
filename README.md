@@ -4,9 +4,72 @@
 
 It's pretty obvious that this class is an implementation of a [state machine](https://en.wikipedia.org/wiki/Finite-state_machine) written in JavaScript. The main difference between this one and the many others out there is that it is built on top of my [EventEmitter](https://github.com/Wolfy87/EventEmitter) class. EventEmitter a is ridiculously fast, small and well tested event library that runs on pretty much every browser and JavaScript platform. It is also ready to load via AMD.
 
+## How to use it
+
+Just in case the heavily commented source is not enough, this section should help you get going with the script.
+
+### Listening to changes in the state
+
+StateMachine extends [EventEmitter](https://github.com/Wolfy87/EventEmitter) to provide [ridiculously fast](http://jsperf.com/eventemitter-3-vs-4/7#results) and [well tested](https://github.com/Wolfy87/EventEmitter/blob/master/tests/tests.js) event management. You can follow the EventEmitter [guide](https://github.com/Wolfy87/EventEmitter/blob/master/docs/guide.md) and [API documentation](https://github.com/Wolfy87/EventEmitter/blob/master/docs/api.md) to learn all about the event management EventEmitter provides.
+
+You can then easily apply that knowledge to this script because the event methods are exactly the same, it's just about listening for specialised events. The events you can listen to on a state machine are as follows.
+
+> *In place of "FROM" and "TO" you would put your state names...*
+
+ * `FROM>TO` - This is emitted when the state changes *from* the specified state *to* the other specified state.
+ * `FROM>` - This is emitted whenever the state changes *from* the specified state. It does not matter what it is changing to.
+ * `>TO` - This is emitted whenever the state changes *to* the specified state. It does not matter what it was before.
+ * `changed` - Every time the state changes this event is emitted. It passes the original and new states to any listeners attached to it.
+
+The events are actually emitted in the order found above. As you will already know from the EventEmitter documentation, you can listen to these events like this.
+
+    var stm = new StateMachine();
+    
+    stm.addListener('foo>bar', function() {
+        console.log('State changed from foo to bar.');
+    });
+
+### Changing the state
+
+To change the state you simply execute the `setState` method with a single string argument which is what you want the state to change to. When executed the state value will update and then the events will be fired. Here's a quick example.
+
+    var stm = new StateMachine();
+    
+    stm.addListener('>foo', function() {
+        console.log('State changed to foo.');
+    });
+    
+    stm.setState('foo');
+
+You can also pass arguments to the listeners as you would with EventEmitter.
+
+    var stm = new StateMachine();
+    
+    stm.addListener('>foo', function(a, b) {
+        console.log(a + b);
+    });
+    
+    stm.setState('foo', [10, 20]);
+
+And if you really want to, you can chain state changes.
+
+    stm
+        .setState('foo', [10, 20])
+        .setState('bar')
+        .setState('foo', [50, 60]);
+
+### Getting the current state
+
+You can use the aptly named `getState` method to get the current state. If there is no current state then it will return `null`.
+
+    var stm = new StateMachine();
+    stm.getState(); // null
+    stm.setState('foo');
+    stm.getState(); // 'foo'
+
 ## Getting the source
 
-There are a few ways you can get a copy of StateMachine. The most obvious would be to download `StateMachine.js` from this repository and load it into your page alongside [`EventEmitter.js`](https://github.com/Wolfy87/EventEmitter). You could do that with a script tag pretty easily.
+There are a few ways you can get a copy of StateMachine. The most obvious would be to download `StateMachine.js` from this repository and load it into your page alongside `EventEmitter.js`. You could do that with a script tag pretty easily.
 
     <script type='text/javascript' src='EventEmitter.js'></script>
     <script type='text/javascript' src='StateMachine.js'></script>
