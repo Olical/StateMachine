@@ -90,9 +90,14 @@
                 this.emitEvent(orig + trans, args);
             }
 
-            // And finally the last event, the one we are transitioning to
+            // Emit for the one we are transitioning to
             // We do not need to check for it because it is a required argument
             this.emitEvent(trans + next, args);
+
+            // The last thing to emit is the changed event
+            // This is a generic event so someone can monitor *all* changes
+            // The listeners attached to it are passed the from and to values
+            this.emitEvent('change', [orig, next]);
 
             // By returning the current instance it creates a chainable API
             return this;
