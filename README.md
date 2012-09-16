@@ -30,6 +30,10 @@ When loading with this method you don't even pollute the global namespace. Every
 
 You will see a few other dependencies come down with the Bower package, but don't panic. EventEmitter is the only real dependency of the script, the others are used for testing among other things in the repository itself. They are not loaded at any point when using StateMachine.
 
+### Fetching the dependencies in a submodule or clone
+
+You may wish to download the source will git and download the dependencies later. You can still use Bower for this, simply run `bower install` whilst inside the StateMachine directory. It will run along and fetch all packages the repository requires to do it's thing.
+
 ## License (MIT)
 
 Copyright (c) 2012 Oliver Caldwell
