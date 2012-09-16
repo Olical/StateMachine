@@ -5,6 +5,9 @@
  */
 
 ;(function(exports) {
+    /*global define:true,EventEmitter:true*/
+    'use strict';
+
     // This is a variable that either contains the native Object.create method
     // Or a custom polyfill from Douglass Crockford
     // It is used in prototypical inheritance
