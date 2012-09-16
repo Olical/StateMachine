@@ -50,9 +50,37 @@
          * Executes the appropriate listeners along the way
          *
          * @param {String} next The new state to use
+         * @param {Array} [args] An optional array of arguments to pass to the event listeners
          * @return The current instance to allow chaining
          */
-        proto.setState = function(next) {
+        proto.setState = function(next, args) {
+            // Store the original state for reference
+            var orig = this.getState(),
+                // And this is the transition indicator
+                trans = '>';
+
+            // And then override it with the new one
+            // We can still do stuff with the old one though because it has been stored in orig
+            this._state = next;
+
+            // Now the state has actually changed it's time to emit some events
+            // The first thing to check is if there was actually a previous state
+            // If we have a from as well as a to then the specific transition needs to be emitted first
+            // This is because it is more specific, so it should take precedence
+            if(orig) {
+                // So this is the most specific event
+                // It is only emitted because we had a from and to
+                this.emitEvent(orig + trans + next, args);
+
+                // Next should be the from event on its own
+                this.emitEvent(orig + trans, args);
+            }
+
+            // And finally the last event, the one we are transitioning to
+            // We do not need to check for it because it is a required argument
+            this.emitEvent(trans + next, args);
+
+            // By returning the current instance it creates a chainable API
             return this;
         };
 
