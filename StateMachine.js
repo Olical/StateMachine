@@ -23,9 +23,21 @@
     function construct(EventEmitter) {
         /**
          * Constructor for the StateMachine class, this is what you instantiate
-         * It does not do anything, it is just here for its prototype object
+         * You can also use it to set an initial state or events
+         *
+         * @param {Object} An object containing an optional initial state and listeners object, for example: { initialState: 'foo', listeners: { '>foo': function() {...} } }
          */
-        function StateMachine(){}
+        function StateMachine(options) {
+            // Register any passed listeners
+            if(options.listeners) {
+                this.addListeners(options.listeners);
+            }
+
+            // Store the initial state if there is one
+            if(options.initialState) {
+                this.setState(options.initialState);
+            }
+        }
 
         // This is a shortcut to the prototype to save time and bytes
         // This line also extends the EventEmitter class using createObject
