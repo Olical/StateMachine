@@ -40,7 +40,7 @@
          * @return {String|Object} The state name as a string or null if there is none set (null is technically an object)
          */
         proto.getState = function() {
-            return typeof this._state === 'string' ? this._state : null;
+            return this._state || null;
         };
 
         // Now we pass the finished class back down the chain
