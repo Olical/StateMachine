@@ -40,6 +40,11 @@ define(['../StateMachine'], function(StateMachine) {
             stm._state = 42; // The answer to life the universe and everything
             expect(stm.getState()).toEqual(null);
         });
+
+        it('returns the string if the state is actually a good string', function() {
+            stm._state = 'foo';
+            expect(stm.getState()).toEqual('foo');
+        });
     });
 
     // Run Jasmine
