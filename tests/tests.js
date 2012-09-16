@@ -11,6 +11,14 @@ define(['../StateMachine'], function(StateMachine) {
         return htmlReporter.specFilter(spec);
     };
 
+    // Configure the tests
+    describe('core', function() {
+        it('loads and defines without error', function() {
+            var stm = new StateMachine();
+            expect(typeof stm).toEqual('object');
+        });
+    });
+
     // Run Jasmine
     jasmineEnv.execute();
 });
