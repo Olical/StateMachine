@@ -117,7 +117,19 @@
         // In this case, AMD is present on the page
         // We will assume (if wrong, I'm sorry) that the script is being loaded with it
         // So we should load EventEmitter from the components directory via AMD too
-        define(['./components/eventEmitter/EventEmitter.js'], construct);
+        var preBuilt;
+        define(['./components/eventEmitter/EventEmitter.js'], function(EventEmitter) {
+            // This function will try to use a previous result of the construct function
+            // This saves rebuilding every time
+
+            // If it has not been built yet then it will be
+            if(!preBuilt) {
+                preBuilt = construct(EventEmitter);
+            }
+
+            // Now return the built version which may have been loaded from the cache thing
+            return preBuilt;
+        });
     }
     else {
         // Without AMD on the page they must load EventEmitter manually
