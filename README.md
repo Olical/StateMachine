@@ -99,7 +99,7 @@ You may wish to download the source will git and download the dependencies later
 
 ## Testing
 
-Tests are performed using [Jasmine](http://pivotal.github.com/jasmine/) in the following browsers via [BrowserStack](http://www.browserstack.com/).
+Tests are performed using [Jasmine](https://jasmine.github.io/) in the following browsers via [BrowserStack](http://www.browserstack.com/).
 
  * Firefox
  * Chrome
